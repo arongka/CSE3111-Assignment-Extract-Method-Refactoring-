@@ -4,7 +4,7 @@ public class Refactorable {
 	private MyCollection _orders = new MyCollection();
 	private String _name = "Customer Name";
 	
-	//extract method applied (part-2) 
+	//extract method applied (part-3) 
 	
 	void printOwing(){
 		Enumeration e = _orders.elements();
@@ -13,13 +13,19 @@ public class Refactorable {
 		// printBanner method extracted 
 		printBanner();
 		
-		// calculate outstanding
+		// calculateOutstanding method extracted
+		outstanding = calculateOutstanding(e, outstanding);
+		
+		// printDetails method extracted 
+		printDetails(outstanding);
+	}
+
+	public double calculateOutstanding(Enumeration e, double outstanding) {
 		while(e.hasMoreElements()){
 			Order each = (Order) e.nextElement();
 			outstanding += each.getAmount();	
 		}
-		// printDetails method extracted 
-		printDetails(outstanding);
+		return outstanding;
 	}
 
 	public void printDetails(double outstanding) {
